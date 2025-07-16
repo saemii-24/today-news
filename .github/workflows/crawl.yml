@@ -1,0 +1,31 @@
+name: naver-news-crawl
+
+on: push
+
+jobs:
+  run-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run crawler
+        id: crawl
+        run: node ./javascript/naverNews.js
+
+      - name: Create GitHub Issue
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: ${{ steps.crawl.outputs.issue_title }}
+          content-filepath: ${{ steps.crawl.outputs.issue_file }}
+          labels: |
+            news
+            automated

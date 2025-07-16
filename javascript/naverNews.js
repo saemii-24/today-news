@@ -1,3 +1,4 @@
+import fs from "fs";
 import puppeteer from "puppeteer";
 import makeMarkdown from "./makeMarkdown.js";
 
@@ -35,6 +36,9 @@ import makeMarkdown from "./makeMarkdown.js";
 
   await browser.close();
 
-  //
-  makeMarkdown(data);
+  const { title, filePath } = makeMarkdown(data);
+
+  //깃허브 액션에 전달함
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, `issue_title=${title}\n`);
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, `issue_file=${filePath}\n`);
 })();
