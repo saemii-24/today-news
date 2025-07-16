@@ -31,5 +31,5 @@ export default function makeMarkdown(data) {
   fs.writeFileSync(filePath, markdown, "utf-8");
 
   console.log(`${data.date}의 뉴스 마크다운이 생성되었습니다.`);
-  return { title, filePath };
+  return { title: data.date + "네이버 실시간 인기 뉴스", filePath };
 }
