@@ -3,12 +3,14 @@ import puppeteer from "puppeteer";
 import makeMarkdown from "./makeMarkdown.js";
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({
+    headless: false,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
 
   await page.goto("https://news.naver.com/main/ranking/popularDay.naver", {
     waitUntil: "networkidle2",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
   const data = await page.evaluate(() => {
