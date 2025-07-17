@@ -4,7 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "screenshot": "node ./javascript/screenshot.js",
     "naver": "node ./javascript/naverNews.js"
   },
@@ -13,6 +13,18 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "jest-environment-jsdom": "^30.0.4",
+    "jest-fixed-jsdom": "^0.0.9",
     "puppeteer": "^24.13.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "msw": "^2.10.4",
+    "undici": "^5.29.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "mock"
+    ]
   }
 }
