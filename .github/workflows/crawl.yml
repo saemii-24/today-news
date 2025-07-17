@@ -1,8 +1,7 @@
 name: naver-news-crawl
 
 on:
-  push:
-    branches: news
+  push
   # schedule:
   #   - cron: "*/5 * * * *"
 
